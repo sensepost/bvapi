@@ -1,5 +1,8 @@
-class BVApiException(Exception):
+class ApiException(Exception):
     pass
 
-class ConnectionError(BVApiException):
+class NotAuthorisedError(ApiException):
+    pass
+
+class NotFoundError(ApiException):
     pass

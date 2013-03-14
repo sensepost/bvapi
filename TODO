@@ -1,0 +1,15 @@
+Goals:
+    Implement API Client:
+        -Connect on HTTPS
+        -Do basic auth
+        -Auth using BV user
+        Allow these queries:
+            -GET status
+                -Return user data
+            -GET accounts
+            -GET jobs
+                -Optionally filter on account_id
+            -GET scans
+                -Filter on job_id
+                -Allow sorting, paging and limits
+            -GET issues
