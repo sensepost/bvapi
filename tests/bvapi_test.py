@@ -1,11 +1,16 @@
+import datetime
 from nose.tools import *
-import bvapi
 import requests
+
+import bvapi
+import dateutil.parser
 
 TEST_USER='admin'
 TEST_PASSWORD='test'
 TEST_URL='http://127.0.0.1:8001/api/v1'
 TEST_ACCOUNT_ID=1
+TEST_JOB_ID=1
+TEST_SCAN_ID=1
 
 def get_client(user=TEST_USER, password=TEST_PASSWORD):
     return bvapi.Client(TEST_URL, user, password)
@@ -37,19 +42,27 @@ class Client2_test(object):
         eq_(result['status'], 'success')
         eq_(result['version'], 'v1')
         eq_(result['user'], TEST_USER)
-
-    def test_client_account(self):
-        result = self.client.account(TEST_ACCOUNT_ID)
-        account = result.get('account')
-        ok_(account)
-        eq_(account.get('id'), TEST_ACCOUNT_ID)
-
-    @raises(bvapi.exceptions.NotFoundError)
-    def test_client_account_not_exist(self):
-        self.client.account(10000000)
+        dt = dateutil.parser.parse(result['current_time'])
+        ok_(dt.tzinfo)
 
     def test_client_accounts(self):
         result = self.client.accounts()
         accounts = result.get('accounts')
         ok_(accounts)
         ok_(accounts[0]['id'])
+
+    def test_client_jobs(self):
+        result = self.client.jobs(TEST_ACCOUNT_ID)
+        jobs = result.get('jobs')
+        ok_(jobs)
+        ok_(jobs[0].get('id'))
+
+    @raises(bvapi.exceptions.NotFoundError)
+    def test_client_jobs_not_exist(self):
+        self.client.jobs(10000000)
+
+    def test_client_scans(self):
+        result = self.client.scans(TEST_JOB_ID)
+        scans = result.get('scans')
+        ok_(scans)
+        ok_(scans[0].get('id'))

@@ -10,7 +10,10 @@ config = {
     'download_url': '',
     'author_email': 'support@sensepost.com',
     'version': '0.1',
-    'install_requires': ['nose'],
+    'install_requires': [
+        'nose',
+        'python-dateutil'
+    ],
     'packages': ['bvapi'],
     'scripts': [],
     'name': 'bvapi'

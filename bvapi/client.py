@@ -32,8 +32,15 @@ class Client(object):
     def status(self):
         return self._request_get('')
 
-    def account(self, account_id):
-        return self._request_get('account/%d' % account_id)
-
     def accounts(self):
         return self._request_get('accounts')
+
+    def jobs(self, account_id):
+        return self._request_get('jobs/%d' % account_id)
+
+    def scans(self, job_id):
+        return self._request_get('scans/%d' % job_id)
+
+    def scan(self, scan_id):
+        return self._request_get('scan/%d' % scan_id)
+
