@@ -38,9 +38,11 @@ class Client(object):
     def jobs(self, account_id):
         return self._request_get('jobs/%d' % account_id)
 
-    def scans(self, job_id):
-        return self._request_get('scans/%d' % job_id)
+    def scans(self, job_id, count=None):
+        if count:
+            return self._request_get('scans/%d/%d' % (job_id, int(count)))
+        else:
+            return self._request_get('scans/%d' % job_id)
 
     def scan(self, scan_id):
         return self._request_get('scan/%d' % scan_id)
-
