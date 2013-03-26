@@ -12,7 +12,10 @@ config = {
     'version': '0.1',
     'install_requires': [
         'nose',
-        'python-dateutil'
+        'python-dateutil',
+        'nosy',
+        'yanc',
+        'requests'
     ],
     'packages': ['bvapi'],
     'scripts': [],
