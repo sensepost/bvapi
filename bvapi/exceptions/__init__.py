@@ -1,8 +1,9 @@
 class ApiException(Exception):
-    pass
+    """Base Exception class for all bvapi exceptions"""
 
 class NotAuthorisedError(ApiException):
-    pass
+    """User was not authorized to perform the API call
+    or access the specified resource"""
 
 class NotFoundError(ApiException):
-    pass
+    """The specified resource was not found"""
