@@ -66,3 +66,14 @@ class Client2_test(object):
         scans = result.get('scans')
         ok_(scans)
         ok_(scans[0].get('id'))
+
+    @raises(bvapi.exceptions.NotFoundError)
+    def test_client_scan_not_exist(self):
+        self.client.scan_data(10000000)
+
+    def test_client_scan_data(self):
+        result = self.client.scan_data(TEST_SCAN_ID)
+        scan = result.get('scan')
+        ok_(scan)
+        ok_(scan.get('id'))
+        ok_('issues' in scan)

@@ -78,7 +78,7 @@ class Client(object):
         else:
             return self._request_get('scans/%d' % job_id)
 
-    def scan(self, scan_id):
+    def scan_data(self, scan_id):
         """Return the scan for the specified scan_id.
 
         The scan will be under the 'scan' key, it will also contain all the
@@ -87,4 +87,4 @@ class Client(object):
         key in the issue.
         """
 
-        return self._request_get('scan/%d' % scan_id)
+        return self._request_get('scan_data/%d' % scan_id)
